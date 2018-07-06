@@ -10,21 +10,35 @@ while True:
     print("2 - DELETE")
     print("3 - SELECT")
     print("4 - UPDATE")
+    print("5 - Select all")
     print("0 - Terminate the program")
     pick = int(input())
 
     if pick == 0:
         break
     elif pick == 1:
-        cursor.execute("INSERT INTO newtable (id) VALUES (?)", ("floyd",))
+        print("Enter ID:")
+        str = input()
+        cursor.execute("INSERT INTO newtable (id) VALUES (?)", (str,))
     elif pick == 2:
-        cursor.execute("DELETE FROM newtable WHERE id = ?", ("floyd",))
+        print("Enter ID:")
+        str = input()
+        cursor.execute("DELETE FROM newtable WHERE id = ?", (str,))
     elif pick == 3:
-        cursor.execute("SELECT * FROM newtable WHERE id = ?", ("floyd",))
+        print("Enter ID:")
+        str = input()
+        cursor.execute("SELECT * FROM newtable WHERE id = ?", (str,))
     elif pick == 4:
-        cursor.execute("UPDATE newtable SET id = ? WHERE id = ?", ("pink", "floyd"))
+        print("Enter ID that you want to update:")
+        str = input()
 
-    result = cursor.fetchone()
+        print("Enter new ID:")
+        str2 = input()
+        cursor.execute("UPDATE newtable SET id = ? WHERE id = ?", (str2, str,))
+    elif pick == 5:
+        cursor.execute("SELECT * FROM newtable")
+
+    result = cursor.fetchall()
     print(result)
     print(cursor.description)
 
